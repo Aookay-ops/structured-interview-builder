@@ -37,7 +37,7 @@ def mock_anchors(comp):
 # ---- Session state (nothing is saved after the tab closes) ----
 ss = st.session_state
 ss.setdefault("job", None)
-ss.setdefault("items", [])  # list of dicts: competency, question, anchors, status
+ss.setdefault("qitems", [])  # list of dicts: competency, question, anchors, status
 
 st.title("Structured Interview Questions Builder")
 st.warning("Draft tool, mock mode. Do not enter names, resumes, or any candidate information.")
@@ -47,7 +47,7 @@ tab1, tab2, tab3 = st.tabs(["1. Job & competencies", "2. Questions & anchors", "
 with tab1:
     if st.button("Load sample job"):
         ss.job = SAMPLE_JOB
-        ss.items = []
+        ss.qitems = []
     if ss.job:
         st.subheader(ss.job["title"])
         st.write(ss.job["duties"])
@@ -58,24 +58,24 @@ with tab2:
     if not ss.job:
         st.info("Load a job in step 1 first.")
     elif st.button("Generate questions and anchors (mock)"):
-        ss.items = [
+        ss.qitems = [
             {"competency": c["name"], "question": q, "anchors": mock_anchors(c), "status": "Draft"}
             for c in ss.job["competencies"] for q in mock_questions(c)
         ]
-    for it in ss.items:
+    for it in ss.qitems:
         with st.expander(f"[{it['competency']}] {it['question']}"):
             for level, text in it["anchors"].items():
                 st.write(f"**{level}** — {text}")
 
 with tab3:
-    if not ss.items:
+    if not ss.qitems:
         st.info("Generate questions in step 2 first.")
-    for i, it in enumerate(ss.items):
+    for i, it in enumerate(ss.qitems):
         it["question"] = st.text_area(f"Question {i+1} ({it['competency']})", it["question"], key=f"q{i}")
         it["status"] = st.radio("Decision", ["Draft", "Approved", "Rejected"],
                                 index=["Draft", "Approved", "Rejected"].index(it["status"]),
                                 horizontal=True, key=f"s{i}")
-    approved = [it for it in ss.items if it["status"] == "Approved"]
+    approved = [it for it in ss.qitems if it["status"] == "Approved"]
     if approved:
         guide = f"# Interview Guide: {ss.job['title']}\n\nDRAFT — requires HR/I-O review before use.\n\n"
         for it in approved:
@@ -83,4 +83,4 @@ with tab3:
             guide += "\n".join(f"- {k}: {v}" for k, v in it["anchors"].items()) + "\n\n"
         st.download_button("Download interview guide (.md)", guide, file_name="interview_guide.md")
     st.caption(f"Approved: {len(approved)} · Rejected: "
-               f"{sum(it['status'] == 'Rejected' for it in ss.items)} · Total: {len(ss.items)}")
+               f"{sum(it['status'] == 'Rejected' for it in ss.qitems)} · Total: {len(ss.qitems)}")
