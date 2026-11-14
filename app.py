@@ -1,4 +1,4 @@
-"""Structured Interview Questions Builder (v0.4, question bank, mock mode).
+"""Structured Interview Questions Builder (v0.5, question bank, Word export, mock mode).
 
 Synthetic data only. Outputs are drafts, not validated assessment material.
 This tool does not score candidates or make hiring decisions.
@@ -6,6 +6,7 @@ This tool does not score candidates or make hiring decisions.
 Questions come from a competency bank in roles.json. Only human-approved questions
 (status "approved") are ever drawn. Theme lives in .streamlit/config.toml.
 """
+import io
 import json
 import random
 from collections import Counter
@@ -13,6 +14,10 @@ from datetime import datetime
 from pathlib import Path
 
 import streamlit as st
+from docx import Document
+from docx.enum.table import WD_TABLE_ALIGNMENT
+from docx.oxml import OxmlElement
+from docx.shared import Inches, Pt, RGBColor
 
 HERE = Path(__file__).parent
 DATA = json.loads((HERE / "roles.json").read_text(encoding="utf-8"))
@@ -113,6 +118,74 @@ def lock_set():
     ss.locked = True
 
 
+PURPLE, SLATE = RGBColor(0x5B, 0x2C, 0xA3), RGBColor(0x2D, 0x3E, 0x50)
+
+
+def build_guide_docx(role, approved_items, rejected):
+    """Interviewer guide as a Word file: same questions and anchors for every candidate,
+    blank lines for the interviewer's own rating and notes. The app itself never scores anyone."""
+    doc = Document()
+    normal = doc.styles["Normal"]
+    normal.font.name, normal.font.size, normal.font.color.rgb = "Calibri", Pt(11), SLATE
+    for lvl in (1, 2, 3):
+        doc.styles[f"Heading {lvl}"].font.color.rgb = PURPLE
+
+    doc.add_heading(f"Interview Guide: {role['title']}", level=1)
+    doc.add_paragraph(DATA["organization"])
+    note = doc.add_paragraph()
+    note.add_run("DRAFT. Requires HR/I-O review before use. ").bold = True
+    note.add_run(f"Generated {datetime.now():%B %d, %Y}. Ask every candidate for this opening the same "
+                 "questions, in this order, and rate each answer against its anchors before moving on.")
+    doc.add_paragraph("Candidate: ____________________   Interviewer: ____________________   "
+                      "Date: __________")
+
+    for n, it in enumerate(approved_items, start=1):
+        # Keep each question block (heading, prompt, anchors, rating line) on one page.
+        h = doc.add_heading(f"Question {n}: {it['competency']}", level=2)
+        h.paragraph_format.keep_with_next = True
+        d = doc.add_paragraph(BANK[it["competency"]]["definition"])
+        d.runs[0].italic, d.paragraph_format.keep_with_next = True, True
+        qp = doc.add_paragraph()
+        qp.add_run(it["question"]).bold = True
+        qp.paragraph_format.keep_with_next = True
+        table = doc.add_table(rows=1, cols=2)
+        table.style, table.alignment = "Light Grid Accent 1", WD_TABLE_ALIGNMENT.CENTER
+        table.autofit = False
+        hdr = table.rows[0].cells
+        hdr[0].text, hdr[1].text = "Rating", "What the answer looks like"
+        for level, text in BANK[it["competency"]]["anchors"].items():
+            row = table.add_row().cells
+            row[0].text, row[1].text = level, text
+        table.columns[0].width, table.columns[1].width = Inches(0.8), Inches(5.7)
+        for row in table.rows:
+            row.cells[0].width, row.cells[1].width = Inches(0.8), Inches(5.7)
+            row._tr.get_or_add_trPr().append(OxmlElement("w:cantSplit"))
+            for cell in row.cells:
+                for p in cell.paragraphs:
+                    p.paragraph_format.keep_with_next = True
+        r = doc.add_paragraph("Rating (1–5): ______")
+        r.paragraph_format.space_before, r.paragraph_format.keep_with_next = Pt(10), True
+        doc.add_paragraph("Notes: " + "_" * 70)
+
+    doc.add_page_break()
+    doc.add_heading("Review log (for HR records)", level=2)
+    doc.add_paragraph(f"Question IDs used: {', '.join(it['qid'] for it in approved_items)}", style="List Bullet")
+    doc.add_paragraph(f"Question sets generated: {ss.metrics['sets']}", style="List Bullet")
+    doc.add_paragraph(f"Single-question swaps: {ss.metrics['swaps']}", style="List Bullet")
+    if ss.swapped_out:
+        doc.add_paragraph("Swapped out (question id: times): " + ", ".join(
+            f"{k}: {v}" for k, v in ss.swapped_out.most_common()), style="List Bullet")
+    if rejected:
+        doc.add_heading("Rejected questions", level=3)
+        for it in rejected:
+            why = it["reason"] + (f": {it['note']}" if it["note"] else "")
+            doc.add_paragraph(f"[{it['competency']}] ({it['qid']}) {it['question']} Reason: {why}",
+                              style="List Bullet")
+    buf = io.BytesIO()
+    doc.save(buf)
+    return buf.getvalue()
+
+
 st.title("Structured Interview Questions Builder")
 st.caption(DATA["organization"])
 st.warning("Draft tool, mock mode. Do not enter names, resumes, or any candidate information.")
@@ -192,24 +265,11 @@ with tab3:
     if approved_items and missing_reason:
         st.warning(f"{len(missing_reason)} rejected question(s) still need a reason before you can export.")
     elif approved_items:
-        guide = (f"# Interview Guide: {role['title']}\n\n"
-                 f"DRAFT. Requires HR/I-O review before use. Generated {datetime.now():%Y-%m-%d %H:%M}.\n"
-                 "Use these same questions, in this order, for every candidate for this opening.\n\n")
-        for it in approved_items:
-            guide += f"## {it['competency']} ({it['qid']})\n{it['question']}\n\n"
-            guide += "\n".join(f"- {k}: {v}" for k, v in BANK[it["competency"]]["anchors"].items()) + "\n\n"
-        guide += ("---\n\n## Review log\n\n"
-                  f"- Question sets generated: {ss.metrics['sets']}\n- Single-question swaps: {ss.metrics['swaps']}\n")
-        if ss.swapped_out:
-            guide += "- Swapped out (question id: times): " + ", ".join(
-                f"{k}: {v}" for k, v in ss.swapped_out.most_common()) + "\n"
-        if rejected:
-            guide += "\n**Rejected questions**\n\n"
-            for it in rejected:
-                why = it["reason"] + (f": {it['note']}" if it["note"] else "")
-                guide += f"- [{it['competency']}] ({it['qid']}) {it['question']} | Reason: {why}\n"
-        st.download_button("Download interview guide (.md) and lock this set", guide,
-                           file_name=f"interview_guide_{role['id']}.md", on_click=lock_set)
+        st.download_button("Download interview guide (Word) and lock this set",
+                           build_guide_docx(role, approved_items, rejected),
+                           file_name=f"interview_guide_{role['id']}.docx",
+                           mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                           on_click=lock_set)
         if ss.locked:
             st.button("Unlock to edit", on_click=lambda: ss.update(locked=False),
                       help="Only unlock if no candidates have been interviewed with this set yet.")
