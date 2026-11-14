@@ -1,6 +1,6 @@
 {
   "_note": "SYNTHETIC DEMO DATA. Roles, duties, questions and anchors are fictional and have not been validated. Question set v2.",
-  "organization": "Minds in Motion (MiM), demo organization",
+  "organization": "Minds in Motion (MiM), a fictional organization created for this demo",
   "roles": [
     {
       "id": "program-coordinator",

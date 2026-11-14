@@ -13,6 +13,7 @@ HERE = Path(__file__).parent
 DATA = json.loads((HERE / "roles.json").read_text(encoding="utf-8"))
 ROLES = {r["id"]: r for r in DATA["roles"]}
 STATUSES = ["Draft", "Approved", "Rejected"]
+REJECT_REASONS = ["Not job-related", "Unclear wording", "Potentially biased wording", "Duplicate", "Other"]
 
 st.set_page_config(page_title="Structured Interview Builder", page_icon=str(HERE / "assets/mim-symbol.png"),
                    layout="wide")
@@ -33,7 +34,8 @@ def reset_items():
 def generate_mock(role):
     """Mock AI output: returns the role's synthetic question set. A live model call replaces this later."""
     ss.qitems = [
-        {"competency": c["name"], "question": q, "anchors": c["anchors"], "status": "Draft"}
+        {"competency": c["name"], "question": q, "anchors": c["anchors"], "status": "Draft",
+         "reason": None, "note": ""}
         for c in role["competencies"] for q in c["questions"]
     ]
     ss.gen += 1
@@ -87,14 +89,37 @@ with tab3:
                                       key=f"q_{ss.gen}_{i}")
         it["status"] = st.radio("Decision", STATUSES, index=STATUSES.index(it["status"]),
                                 horizontal=True, key=f"s_{ss.gen}_{i}")
+        if it["status"] == "Rejected":
+            it["reason"] = st.selectbox("Reason for rejecting (required)", REJECT_REASONS, index=None,
+                                        placeholder="Choose a reason", key=f"r_{ss.gen}_{i}")
+            if it["reason"] == "Other":
+                it["note"] = st.text_input("Briefly describe the reason (no candidate information)",
+                                           key=f"n_{ss.gen}_{i}")
+            if not it["reason"]:
+                st.error("Choose a reason before exporting.")
+        else:
+            it["reason"], it["note"] = None, ""
+        st.divider()
+
     approved = [it for it in ss.qitems if it["status"] == "Approved"]
-    if approved:
+    rejected = [it for it in ss.qitems if it["status"] == "Rejected"]
+    missing_reason = [it for it in rejected if not it["reason"]]
+    if approved and missing_reason:
+        st.warning(f"{len(missing_reason)} rejected question(s) still need a reason before you can export.")
+    elif approved:
         guide = f"# Interview Guide: {role['title']}\n\nDRAFT. Requires HR/I-O review before use.\n\n"
         for it in approved:
             guide += f"## {it['competency']}\n{it['question']}\n\n"
             guide += "\n".join(f"- {k}: {v}" for k, v in it["anchors"].items()) + "\n\n"
+        if rejected:
+            guide += "---\n\n## Review log: rejected questions\n\n"
+            for it in rejected:
+                why = it["reason"] + (f": {it['note']}" if it["note"] else "")
+                guide += f"- [{it['competency']}] {it['question']} | Reason: {why}\n"
         st.download_button("Download interview guide (.md)", guide,
                            file_name=f"interview_guide_{role['id']}.md")
     if ss.qitems:
-        st.caption(f"Approved: {len(approved)} · Rejected: "
-                   f"{sum(it['status'] == 'Rejected' for it in ss.qitems)} · Total: {len(ss.qitems)}")
+        counts = {r: sum(it["reason"] == r for it in rejected) for r in REJECT_REASONS}
+        reasons = ", ".join(f"{r} {n}" for r, n in counts.items() if n)
+        st.caption(f"Approved: {len(approved)} · Rejected: {len(rejected)}"
+                   f"{f' ({reasons})' if reasons else ''} · Total: {len(ss.qitems)}")
