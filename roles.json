@@ -1,0 +1,162 @@
+{
+  "_note": "SYNTHETIC DEMO DATA. Roles, duties, questions and anchors are fictional and have not been validated. Question set v2.",
+  "organization": "Minds in Motion (MiM), demo organization",
+  "roles": [
+    {
+      "id": "program-coordinator",
+      "title": "Program Coordinator",
+      "summary": "Keeps MiM's workplace wellness workshops running on schedule: plans sessions, tracks enrollment, and keeps employer partners informed.",
+      "duties": [
+        "Schedule and coordinate workshops with employer partners",
+        "Track participant enrollment and attendance",
+        "Send updates and reminders to partner contacts",
+        "Prepare monthly program reports"
+      ],
+      "competencies": [
+        {
+          "name": "Planning & Organizing",
+          "definition": "Schedules tasks and resources to meet deadlines.",
+          "questions": [
+            "Tell me about a time you planned an event or workshop with a fixed date and limited resources. How did you schedule the tasks, and what was the result?",
+            "Describe a time when two deadlines conflicted. How did you decide what to do first, and how did it turn out?"
+          ],
+          "anchors": {
+            "1": "Describes general intentions (\"I stay organized\") with no specific example of scheduling or prioritizing.",
+            "3": "Gives a specific example of planning tasks or setting priorities; steps are partly described and the outcome is unclear.",
+            "5": "Gives a specific example showing how tasks, timelines, and resources were sequenced; explains how priorities were set and the deadline or outcome that resulted."
+          }
+        },
+        {
+          "name": "Stakeholder Communication",
+          "definition": "Shares clear, timely information with partners.",
+          "questions": [
+            "Tell me about a time you had to tell an outside partner about a change in plans. How did you communicate it, and how did they respond?",
+            "Describe a situation where a partner misunderstood information you gave them. What did you do to clear it up?"
+          ],
+          "anchors": {
+            "1": "Speaks generally about communicating well; no example of what was shared, with whom, or when.",
+            "3": "Describes a specific communication with a partner; the message and timing are clear, but the partner's response or follow-up is not.",
+            "5": "Describes what was communicated, how and when it was tailored to the partner, how understanding was checked, and the result."
+          }
+        },
+        {
+          "name": "Attention to Detail",
+          "definition": "Produces accurate records and reports.",
+          "questions": [
+            "Tell me about a time you found an error in a report or record before it was shared. How did you catch it, and what did you do next?",
+            "Describe how you kept enrollment or tracking data accurate over time. Give a specific example."
+          ],
+          "anchors": {
+            "1": "Says they are detail-oriented without an example of catching or preventing an error.",
+            "3": "Describes a specific error caught or check performed; the method is partly explained.",
+            "5": "Describes a specific error caught or prevented, the checking method used, the correction made, and a step taken to keep it from happening again."
+          }
+        }
+      ]
+    },
+    {
+      "id": "workshop-facilitator",
+      "title": "Workshop Facilitator",
+      "summary": "Leads interactive, education-focused workshops on workplace well-being for employer teams, in person and online.",
+      "duties": [
+        "Deliver MiM's standard workshop curriculum to groups of 10 to 40 employees",
+        "Adapt activities for in-person and virtual sessions",
+        "Guide group discussion so every participant can take part",
+        "Collect session feedback and suggest curriculum updates"
+      ],
+      "competencies": [
+        {
+          "name": "Group Facilitation",
+          "definition": "Guides group discussion and activities so participants stay engaged and on track.",
+          "questions": [
+            "Tell me about a time you led a group session where participation was uneven. What did you do to involve more people, and what happened?",
+            "Describe a time a group discussion went off topic or became tense. How did you bring it back on track?"
+          ],
+          "anchors": {
+            "1": "Describes presenting to a group but not how participation or discussion was managed.",
+            "3": "Describes one specific technique used to engage the group; the effect on participation is partly described.",
+            "5": "Describes specific techniques used to involve quieter participants or redirect discussion, how the group responded, and how the session goals were met."
+          }
+        },
+        {
+          "name": "Adaptability",
+          "definition": "Adjusts approach when plans, audiences, or settings change.",
+          "questions": [
+            "Tell me about a time you had to change your plan for a training or presentation at the last minute. What did you change, and how did it go?",
+            "Describe a time you delivered the same content to two very different audiences. How did you adjust your approach for each?"
+          ],
+          "anchors": {
+            "1": "Describes a change in circumstances but not what they personally did differently.",
+            "3": "Describes a specific adjustment to the plan or approach; the reasoning or result is partly explained.",
+            "5": "Explains what changed, why the adjustment was chosen, how it was carried out, and the result for the audience or task."
+          }
+        },
+        {
+          "name": "Learning from Feedback",
+          "definition": "Seeks and uses feedback to improve sessions.",
+          "questions": [
+            "Tell me about a time you received critical feedback on a presentation or session. What did you change as a result?",
+            "Describe how you have collected feedback from participants and used it to improve something you delivered. Give a specific example."
+          ],
+          "anchors": {
+            "1": "Mentions receiving feedback but describes no change made in response.",
+            "3": "Describes specific feedback and a change made; the impact of the change is unclear.",
+            "5": "Describes how feedback was gathered or received, the specific change made, and evidence that the change improved the result."
+          }
+        }
+      ]
+    },
+    {
+      "id": "partnerships-outreach-specialist",
+      "title": "Partnerships & Outreach Specialist",
+      "summary": "Builds relationships with local employers and community organizations so MiM's programs reach their teams.",
+      "duties": [
+        "Identify and contact prospective employer partners",
+        "Present MiM's programs to HR and leadership contacts",
+        "Keep partner records current in the contact database",
+        "Coordinate partnership agreements and follow-ups"
+      ],
+      "competencies": [
+        {
+          "name": "Relationship Building",
+          "definition": "Develops and maintains productive working relationships with external partners.",
+          "questions": [
+            "Tell me about a time you built a working relationship with someone outside your organization from scratch. What steps did you take?",
+            "Describe a time a relationship with a partner or client became strained. What did you do to repair it?"
+          ],
+          "anchors": {
+            "1": "Speaks generally about being good with people; no specific relationship or steps described.",
+            "3": "Describes a specific relationship and some steps taken to build or repair it; the outcome is partly clear.",
+            "5": "Describes specific, deliberate steps taken over time to build or repair a relationship, and a concrete result such as a renewed agreement or ongoing collaboration."
+          }
+        },
+        {
+          "name": "Persuasive Communication",
+          "definition": "Presents information in a way that helps others make informed decisions.",
+          "questions": [
+            "Tell me about a time you had to convince a decision-maker to try a new program, service, or idea. How did you make your case, and what was the outcome?",
+            "Describe a time someone raised an objection to something you proposed. How did you respond?"
+          ],
+          "anchors": {
+            "1": "Describes the idea but not how the case was made or how concerns were handled.",
+            "3": "Describes how the case was presented to a specific audience; handling of concerns is partly described.",
+            "5": "Describes tailoring the case to the decision-maker's priorities, using evidence, responding to concerns, and the decision that resulted."
+          }
+        },
+        {
+          "name": "Follow-Through",
+          "definition": "Tracks commitments and completes next steps on time.",
+          "questions": [
+            "Tell me about a time you were managing follow-ups with several contacts at once. How did you keep track, and what was the result?",
+            "Describe a time you realized a commitment you made was at risk of slipping. What did you do?"
+          ],
+          "anchors": {
+            "1": "Says they always follow up, with no example of a tracking method or a completed commitment.",
+            "3": "Describes a specific method for tracking commitments; the outcome is partly described.",
+            "5": "Describes a specific tracking method, how at-risk commitments were spotted and handled, and the commitments completed on time."
+          }
+        }
+      ]
+    }
+  ]
+}
