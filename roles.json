@@ -1,5 +1,5 @@
 {
-  "_note": "SYNTHETIC DEMO DATA. Roles, duties, questions and anchors are fictional and have not been validated. Question set v2.",
+  "_note": "SYNTHETIC DEMO DATA. Question bank v3. Only questions with status 'approved' are shown in the app. AI-drafted questions enter as 'pending_review' and are approved by a human reviewer (status: approved / rejected). v3 review completed 2026-11-14: 36 of 36 drafts approved, 0 edited, 0 rejected.",
   "organization": "Minds in Motion (MiM), a fictional organization created for this demo",
   "roles": [
     {
@@ -13,45 +13,9 @@
         "Prepare monthly program reports"
       ],
       "competencies": [
-        {
-          "name": "Planning & Organizing",
-          "definition": "Schedules tasks and resources to meet deadlines.",
-          "questions": [
-            "Tell me about a time you planned an event or workshop with a fixed date and limited resources. How did you schedule the tasks, and what was the result?",
-            "Describe a time when two deadlines conflicted. How did you decide what to do first, and how did it turn out?"
-          ],
-          "anchors": {
-            "1": "Describes general intentions (\"I stay organized\") with no specific example of scheduling or prioritizing.",
-            "3": "Gives a specific example of planning tasks or setting priorities; steps are partly described and the outcome is unclear.",
-            "5": "Gives a specific example showing how tasks, timelines, and resources were sequenced; explains how priorities were set and the deadline or outcome that resulted."
-          }
-        },
-        {
-          "name": "Stakeholder Communication",
-          "definition": "Shares clear, timely information with partners.",
-          "questions": [
-            "Tell me about a time you had to tell an outside partner about a change in plans. How did you communicate it, and how did they respond?",
-            "Describe a situation where a partner misunderstood information you gave them. What did you do to clear it up?"
-          ],
-          "anchors": {
-            "1": "Speaks generally about communicating well; no example of what was shared, with whom, or when.",
-            "3": "Describes a specific communication with a partner; the message and timing are clear, but the partner's response or follow-up is not.",
-            "5": "Describes what was communicated, how and when it was tailored to the partner, how understanding was checked, and the result."
-          }
-        },
-        {
-          "name": "Attention to Detail",
-          "definition": "Produces accurate records and reports.",
-          "questions": [
-            "Tell me about a time you found an error in a report or record before it was shared. How did you catch it, and what did you do next?",
-            "Describe how you kept enrollment or tracking data accurate over time. Give a specific example."
-          ],
-          "anchors": {
-            "1": "Says they are detail-oriented without an example of catching or preventing an error.",
-            "3": "Describes a specific error caught or check performed; the method is partly explained.",
-            "5": "Describes a specific error caught or prevented, the checking method used, the correction made, and a step taken to keep it from happening again."
-          }
-        }
+        "Planning & Organizing",
+        "Stakeholder Communication",
+        "Attention to Detail"
       ]
     },
     {
@@ -65,45 +29,9 @@
         "Collect session feedback and suggest curriculum updates"
       ],
       "competencies": [
-        {
-          "name": "Group Facilitation",
-          "definition": "Guides group discussion and activities so participants stay engaged and on track.",
-          "questions": [
-            "Tell me about a time you led a group session where participation was uneven. What did you do to involve more people, and what happened?",
-            "Describe a time a group discussion went off topic or became tense. How did you bring it back on track?"
-          ],
-          "anchors": {
-            "1": "Describes presenting to a group but not how participation or discussion was managed.",
-            "3": "Describes one specific technique used to engage the group; the effect on participation is partly described.",
-            "5": "Describes specific techniques used to involve quieter participants or redirect discussion, how the group responded, and how the session goals were met."
-          }
-        },
-        {
-          "name": "Adaptability",
-          "definition": "Adjusts approach when plans, audiences, or settings change.",
-          "questions": [
-            "Tell me about a time you had to change your plan for a training or presentation at the last minute. What did you change, and how did it go?",
-            "Describe a time you delivered the same content to two very different audiences. How did you adjust your approach for each?"
-          ],
-          "anchors": {
-            "1": "Describes a change in circumstances but not what they personally did differently.",
-            "3": "Describes a specific adjustment to the plan or approach; the reasoning or result is partly explained.",
-            "5": "Explains what changed, why the adjustment was chosen, how it was carried out, and the result for the audience or task."
-          }
-        },
-        {
-          "name": "Learning from Feedback",
-          "definition": "Seeks and uses feedback to improve sessions.",
-          "questions": [
-            "Tell me about a time you received critical feedback on a presentation or session. What did you change as a result?",
-            "Describe how you have collected feedback from participants and used it to improve something you delivered. Give a specific example."
-          ],
-          "anchors": {
-            "1": "Mentions receiving feedback but describes no change made in response.",
-            "3": "Describes specific feedback and a change made; the impact of the change is unclear.",
-            "5": "Describes how feedback was gathered or received, the specific change made, and evidence that the change improved the result."
-          }
-        }
+        "Group Facilitation",
+        "Adaptability",
+        "Learning from Feedback"
       ]
     },
     {
@@ -117,46 +45,462 @@
         "Coordinate partnership agreements and follow-ups"
       ],
       "competencies": [
+        "Relationship Building",
+        "Persuasive Communication",
+        "Follow-Through"
+      ]
+    }
+  ],
+  "competencies": {
+    "Planning & Organizing": {
+      "definition": "Schedules tasks and resources to meet deadlines.",
+      "anchors": {
+        "1": "Describes general intentions (\"I stay organized\") with no specific example of scheduling or prioritizing.",
+        "3": "Gives a specific example of planning tasks or setting priorities; steps are partly described and the outcome is unclear.",
+        "5": "Gives a specific example showing how tasks, timelines, and resources were sequenced; explains how priorities were set and the deadline or outcome that resulted."
+      },
+      "questions": [
         {
-          "name": "Relationship Building",
-          "definition": "Develops and maintains productive working relationships with external partners.",
-          "questions": [
-            "Tell me about a time you built a working relationship with someone outside your organization from scratch. What steps did you take?",
-            "Describe a time a relationship with a partner or client became strained. What did you do to repair it?"
-          ],
-          "anchors": {
-            "1": "Speaks generally about being good with people; no specific relationship or steps described.",
-            "3": "Describes a specific relationship and some steps taken to build or repair it; the outcome is partly clear.",
-            "5": "Describes specific, deliberate steps taken over time to build or repair a relationship, and a concrete result such as a renewed agreement or ongoing collaboration."
-          }
+          "id": "PO-01",
+          "text": "Tell me about a time you planned an event or workshop with a fixed date and limited resources. How did you schedule the tasks, and what was the result?",
+          "status": "approved",
+          "added": "v2"
         },
         {
-          "name": "Persuasive Communication",
-          "definition": "Presents information in a way that helps others make informed decisions.",
-          "questions": [
-            "Tell me about a time you had to convince a decision-maker to try a new program, service, or idea. How did you make your case, and what was the outcome?",
-            "Describe a time someone raised an objection to something you proposed. How did you respond?"
-          ],
-          "anchors": {
-            "1": "Describes the idea but not how the case was made or how concerns were handled.",
-            "3": "Describes how the case was presented to a specific audience; handling of concerns is partly described.",
-            "5": "Describes tailoring the case to the decision-maker's priorities, using evidence, responding to concerns, and the decision that resulted."
-          }
+          "id": "PO-02",
+          "text": "Describe a time when two deadlines conflicted. How did you decide what to do first, and how did it turn out?",
+          "status": "approved",
+          "added": "v2"
         },
         {
-          "name": "Follow-Through",
-          "definition": "Tracks commitments and completes next steps on time.",
-          "questions": [
-            "Tell me about a time you were managing follow-ups with several contacts at once. How did you keep track, and what was the result?",
-            "Describe a time you realized a commitment you made was at risk of slipping. What did you do?"
-          ],
-          "anchors": {
-            "1": "Says they always follow up, with no example of a tracking method or a completed commitment.",
-            "3": "Describes a specific method for tracking commitments; the outcome is partly described.",
-            "5": "Describes a specific tracking method, how at-risk commitments were spotted and handled, and the commitments completed on time."
-          }
+          "id": "PO-03",
+          "text": "Tell me about a time you planned a project with several steps that depended on each other. How did you map out the order, and what was the outcome?",
+          "status": "approved",
+          "added": "v3-draft",
+          "reviewed": "2026-11-14, human reviewer (project owner), approved without edits"
+        },
+        {
+          "id": "PO-04",
+          "text": "Describe a week when you had more tasks than time. How did you decide what to do, delay, or hand off?",
+          "status": "approved",
+          "added": "v3-draft",
+          "reviewed": "2026-11-14, human reviewer (project owner), approved without edits"
+        },
+        {
+          "id": "PO-05",
+          "text": "Tell me about a time a plan you made fell behind schedule. How did you notice, and what did you do to get it back on track?",
+          "status": "approved",
+          "added": "v3-draft",
+          "reviewed": "2026-11-14, human reviewer (project owner), approved without edits"
+        },
+        {
+          "id": "PO-06",
+          "text": "Describe a recurring task you set up a system to manage, such as a calendar or checklist. How did it work, and what difference did it make?",
+          "status": "approved",
+          "added": "v3-draft",
+          "reviewed": "2026-11-14, human reviewer (project owner), approved without edits"
+        }
+      ]
+    },
+    "Stakeholder Communication": {
+      "definition": "Shares clear, timely information with partners.",
+      "anchors": {
+        "1": "Speaks generally about communicating well; no example of what was shared, with whom, or when.",
+        "3": "Describes a specific communication with a partner; the message and timing are clear, but the partner's response or follow-up is not.",
+        "5": "Describes what was communicated, how and when it was tailored to the partner, how understanding was checked, and the result."
+      },
+      "questions": [
+        {
+          "id": "SC-01",
+          "text": "Tell me about a time you had to tell an outside partner about a change in plans. How did you communicate it, and how did they respond?",
+          "status": "approved",
+          "added": "v2"
+        },
+        {
+          "id": "SC-02",
+          "text": "Describe a situation where a partner misunderstood information you gave them. What did you do to clear it up?",
+          "status": "approved",
+          "added": "v2"
+        },
+        {
+          "id": "SC-03",
+          "text": "Tell me about a time you had to share bad news with a partner or client. How did you prepare, and how did the conversation go?",
+          "status": "approved",
+          "added": "v3-draft",
+          "reviewed": "2026-11-14, human reviewer (project owner), approved without edits"
+        },
+        {
+          "id": "SC-04",
+          "text": "Describe a time you had to explain a complicated process to someone outside your field. What did you do to make it clear?",
+          "status": "approved",
+          "added": "v3-draft",
+          "reviewed": "2026-11-14, human reviewer (project owner), approved without edits"
+        },
+        {
+          "id": "SC-05",
+          "text": "Tell me about a time you kept several partners updated on the same project. How did you decide what each one needed to know, and when?",
+          "status": "approved",
+          "added": "v3-draft",
+          "reviewed": "2026-11-14, human reviewer (project owner), approved without edits"
+        },
+        {
+          "id": "SC-06",
+          "text": "Describe a time you realized a partner had not received information they needed. What happened, and what did you do?",
+          "status": "approved",
+          "added": "v3-draft",
+          "reviewed": "2026-11-14, human reviewer (project owner), approved without edits"
+        }
+      ]
+    },
+    "Attention to Detail": {
+      "definition": "Produces accurate records and reports.",
+      "anchors": {
+        "1": "Says they are detail-oriented without an example of catching or preventing an error.",
+        "3": "Describes a specific error caught or check performed; the method is partly explained.",
+        "5": "Describes a specific error caught or prevented, the checking method used, the correction made, and a step taken to keep it from happening again."
+      },
+      "questions": [
+        {
+          "id": "AD-01",
+          "text": "Tell me about a time you found an error in a report or record before it was shared. How did you catch it, and what did you do next?",
+          "status": "approved",
+          "added": "v2"
+        },
+        {
+          "id": "AD-02",
+          "text": "Describe how you kept enrollment or tracking data accurate over time. Give a specific example.",
+          "status": "approved",
+          "added": "v2"
+        },
+        {
+          "id": "AD-03",
+          "text": "Tell me about a time you had to enter or review a large amount of data. What steps did you take to make sure it was accurate?",
+          "status": "approved",
+          "added": "v3-draft",
+          "reviewed": "2026-11-14, human reviewer (project owner), approved without edits"
+        },
+        {
+          "id": "AD-04",
+          "text": "Describe a time a small error you made was caught by someone else. What happened, and what did you change afterward?",
+          "status": "approved",
+          "added": "v3-draft",
+          "reviewed": "2026-11-14, human reviewer (project owner), approved without edits"
+        },
+        {
+          "id": "AD-05",
+          "text": "Tell me about a time you had to meet detailed requirements, such as for a grant or contract. How did you make sure you met every one?",
+          "status": "approved",
+          "added": "v3-draft",
+          "reviewed": "2026-11-14, human reviewer (project owner), approved without edits"
+        },
+        {
+          "id": "AD-06",
+          "text": "Describe a time you double-checked someone else's work. What did you look for, and what did you find?",
+          "status": "approved",
+          "added": "v3-draft",
+          "reviewed": "2026-11-14, human reviewer (project owner), approved without edits"
+        }
+      ]
+    },
+    "Group Facilitation": {
+      "definition": "Guides group discussion and activities so participants stay engaged and on track.",
+      "anchors": {
+        "1": "Describes presenting to a group but not how participation or discussion was managed.",
+        "3": "Describes one specific technique used to engage the group; the effect on participation is partly described.",
+        "5": "Describes specific techniques used to involve quieter participants or redirect discussion, how the group responded, and how the session goals were met."
+      },
+      "questions": [
+        {
+          "id": "GF-01",
+          "text": "Tell me about a time you led a group session where participation was uneven. What did you do to involve more people, and what happened?",
+          "status": "approved",
+          "added": "v2"
+        },
+        {
+          "id": "GF-02",
+          "text": "Describe a time a group discussion went off topic or became tense. How did you bring it back on track?",
+          "status": "approved",
+          "added": "v2"
+        },
+        {
+          "id": "GF-03",
+          "text": "Tell me about a time one person was dominating a group discussion. What did you do, and how did the group respond?",
+          "status": "approved",
+          "added": "v3-draft",
+          "reviewed": "2026-11-14, human reviewer (project owner), approved without edits"
+        },
+        {
+          "id": "GF-04",
+          "text": "Describe a time you led an activity that was not working as planned. How did you notice, and what did you do?",
+          "status": "approved",
+          "added": "v3-draft",
+          "reviewed": "2026-11-14, human reviewer (project owner), approved without edits"
+        },
+        {
+          "id": "GF-05",
+          "text": "Tell me about a time you facilitated a session with people who did not know each other. How did you get them comfortable participating?",
+          "status": "approved",
+          "added": "v3-draft",
+          "reviewed": "2026-11-14, human reviewer (project owner), approved without edits"
+        },
+        {
+          "id": "GF-06",
+          "text": "Describe a time you had to keep a group on schedule while still giving everyone a chance to contribute. How did you balance the two?",
+          "status": "approved",
+          "added": "v3-draft",
+          "reviewed": "2026-11-14, human reviewer (project owner), approved without edits"
+        }
+      ]
+    },
+    "Adaptability": {
+      "definition": "Adjusts approach when plans, audiences, or settings change.",
+      "anchors": {
+        "1": "Describes a change in circumstances but not what they personally did differently.",
+        "3": "Describes a specific adjustment to the plan or approach; the reasoning or result is partly explained.",
+        "5": "Explains what changed, why the adjustment was chosen, how it was carried out, and the result for the audience or task."
+      },
+      "questions": [
+        {
+          "id": "AP-01",
+          "text": "Tell me about a time you had to change your plan for a training or presentation at the last minute. What did you change, and how did it go?",
+          "status": "approved",
+          "added": "v2"
+        },
+        {
+          "id": "AP-02",
+          "text": "Describe a time you delivered the same content to two very different audiences. How did you adjust your approach for each?",
+          "status": "approved",
+          "added": "v2"
+        },
+        {
+          "id": "AP-03",
+          "text": "Tell me about a time technology failed during a presentation or meeting you were leading. What did you do?",
+          "status": "approved",
+          "added": "v3-draft",
+          "reviewed": "2026-11-14, human reviewer (project owner), approved without edits"
+        },
+        {
+          "id": "AP-04",
+          "text": "Describe a time your priorities changed suddenly because of a decision someone else made. How did you adjust?",
+          "status": "approved",
+          "added": "v3-draft",
+          "reviewed": "2026-11-14, human reviewer (project owner), approved without edits"
+        },
+        {
+          "id": "AP-05",
+          "text": "Tell me about a time you had to learn a new tool or process quickly to keep work moving. How did you approach it?",
+          "status": "approved",
+          "added": "v3-draft",
+          "reviewed": "2026-11-14, human reviewer (project owner), approved without edits"
+        },
+        {
+          "id": "AP-06",
+          "text": "Describe a time you were asked to take on a task outside your usual role. How did you approach it, and how did it turn out?",
+          "status": "approved",
+          "added": "v3-draft",
+          "reviewed": "2026-11-14, human reviewer (project owner), approved without edits"
+        }
+      ]
+    },
+    "Learning from Feedback": {
+      "definition": "Seeks and uses feedback to improve sessions.",
+      "anchors": {
+        "1": "Mentions receiving feedback but describes no change made in response.",
+        "3": "Describes specific feedback and a change made; the impact of the change is unclear.",
+        "5": "Describes how feedback was gathered or received, the specific change made, and evidence that the change improved the result."
+      },
+      "questions": [
+        {
+          "id": "LF-01",
+          "text": "Tell me about a time you received critical feedback on a presentation or session. What did you change as a result?",
+          "status": "approved",
+          "added": "v2"
+        },
+        {
+          "id": "LF-02",
+          "text": "Describe how you have collected feedback from participants and used it to improve something you delivered. Give a specific example.",
+          "status": "approved",
+          "added": "v2"
+        },
+        {
+          "id": "LF-03",
+          "text": "Tell me about a time you asked for feedback on your work before it was finished. Who did you ask, and what did you do with it?",
+          "status": "approved",
+          "added": "v3-draft",
+          "reviewed": "2026-11-14, human reviewer (project owner), approved without edits"
+        },
+        {
+          "id": "LF-04",
+          "text": "Describe a time you received feedback you disagreed with. How did you handle it?",
+          "status": "approved",
+          "added": "v3-draft",
+          "reviewed": "2026-11-14, human reviewer (project owner), approved without edits"
+        },
+        {
+          "id": "LF-05",
+          "text": "Tell me about a time you noticed a pattern in feedback from several people. What did you change as a result?",
+          "status": "approved",
+          "added": "v3-draft",
+          "reviewed": "2026-11-14, human reviewer (project owner), approved without edits"
+        },
+        {
+          "id": "LF-06",
+          "text": "Describe a skill you improved because of feedback from a supervisor or colleague. What steps did you take?",
+          "status": "approved",
+          "added": "v3-draft",
+          "reviewed": "2026-11-14, human reviewer (project owner), approved without edits"
+        }
+      ]
+    },
+    "Relationship Building": {
+      "definition": "Develops and maintains productive working relationships with external partners.",
+      "anchors": {
+        "1": "Speaks generally about being good with people; no specific relationship or steps described.",
+        "3": "Describes a specific relationship and some steps taken to build or repair it; the outcome is partly clear.",
+        "5": "Describes specific, deliberate steps taken over time to build or repair a relationship, and a concrete result such as a renewed agreement or ongoing collaboration."
+      },
+      "questions": [
+        {
+          "id": "RB-01",
+          "text": "Tell me about a time you built a working relationship with someone outside your organization from scratch. What steps did you take?",
+          "status": "approved",
+          "added": "v2"
+        },
+        {
+          "id": "RB-02",
+          "text": "Describe a time a relationship with a partner or client became strained. What did you do to repair it?",
+          "status": "approved",
+          "added": "v2"
+        },
+        {
+          "id": "RB-03",
+          "text": "Tell me about a time you kept in touch with a contact over a long period before any work came from it. How did you stay connected?",
+          "status": "approved",
+          "added": "v3-draft",
+          "reviewed": "2026-11-14, human reviewer (project owner), approved without edits"
+        },
+        {
+          "id": "RB-04",
+          "text": "Describe a time you worked with a partner whose goals were different from yours. How did you find common ground?",
+          "status": "approved",
+          "added": "v3-draft",
+          "reviewed": "2026-11-14, human reviewer (project owner), approved without edits"
+        },
+        {
+          "id": "RB-05",
+          "text": "Tell me about a time you took over an existing partner relationship from someone else. What did you do to build trust?",
+          "status": "approved",
+          "added": "v3-draft",
+          "reviewed": "2026-11-14, human reviewer (project owner), approved without edits"
+        },
+        {
+          "id": "RB-06",
+          "text": "Describe a time you introduced two contacts or organizations to each other. Why did you do it, and what came of it?",
+          "status": "approved",
+          "added": "v3-draft",
+          "reviewed": "2026-11-14, human reviewer (project owner), approved without edits"
+        }
+      ]
+    },
+    "Persuasive Communication": {
+      "definition": "Presents information in a way that helps others make informed decisions.",
+      "anchors": {
+        "1": "Describes the idea but not how the case was made or how concerns were handled.",
+        "3": "Describes how the case was presented to a specific audience; handling of concerns is partly described.",
+        "5": "Describes tailoring the case to the decision-maker's priorities, using evidence, responding to concerns, and the decision that resulted."
+      },
+      "questions": [
+        {
+          "id": "PC-01",
+          "text": "Tell me about a time you had to convince a decision-maker to try a new program, service, or idea. How did you make your case, and what was the outcome?",
+          "status": "approved",
+          "added": "v2"
+        },
+        {
+          "id": "PC-02",
+          "text": "Describe a time someone raised an objection to something you proposed. How did you respond?",
+          "status": "approved",
+          "added": "v2"
+        },
+        {
+          "id": "PC-03",
+          "text": "Tell me about a time you used data or evidence to support a recommendation. How did you present it, and what was decided?",
+          "status": "approved",
+          "added": "v3-draft",
+          "reviewed": "2026-11-14, human reviewer (project owner), approved without edits"
+        },
+        {
+          "id": "PC-04",
+          "text": "Describe a time you changed how you presented an idea because your first approach did not work. What did you change?",
+          "status": "approved",
+          "added": "v3-draft",
+          "reviewed": "2026-11-14, human reviewer (project owner), approved without edits"
+        },
+        {
+          "id": "PC-05",
+          "text": "Tell me about a time you presented to senior leaders or a board. How did you prepare for their questions?",
+          "status": "approved",
+          "added": "v3-draft",
+          "reviewed": "2026-11-14, human reviewer (project owner), approved without edits"
+        },
+        {
+          "id": "PC-06",
+          "text": "Describe a time you needed agreement from several people with different priorities. How did you bring them to a decision?",
+          "status": "approved",
+          "added": "v3-draft",
+          "reviewed": "2026-11-14, human reviewer (project owner), approved without edits"
+        }
+      ]
+    },
+    "Follow-Through": {
+      "definition": "Tracks commitments and completes next steps on time.",
+      "anchors": {
+        "1": "Says they always follow up, with no example of a tracking method or a completed commitment.",
+        "3": "Describes a specific method for tracking commitments; the outcome is partly described.",
+        "5": "Describes a specific tracking method, how at-risk commitments were spotted and handled, and the commitments completed on time."
+      },
+      "questions": [
+        {
+          "id": "FT-01",
+          "text": "Tell me about a time you were managing follow-ups with several contacts at once. How did you keep track, and what was the result?",
+          "status": "approved",
+          "added": "v2"
+        },
+        {
+          "id": "FT-02",
+          "text": "Describe a time you realized a commitment you made was at risk of slipping. What did you do?",
+          "status": "approved",
+          "added": "v2"
+        },
+        {
+          "id": "FT-03",
+          "text": "Tell me about a time you committed to a deadline for someone outside your team. How did you make sure you met it?",
+          "status": "approved",
+          "added": "v3-draft",
+          "reviewed": "2026-11-14, human reviewer (project owner), approved without edits"
+        },
+        {
+          "id": "FT-04",
+          "text": "Describe a time the next steps were unclear after a meeting. What did you do?",
+          "status": "approved",
+          "added": "v3-draft",
+          "reviewed": "2026-11-14, human reviewer (project owner), approved without edits"
+        },
+        {
+          "id": "FT-05",
+          "text": "Tell me about a time you had to finish a task someone else started. How did you figure out what was left, and how did it turn out?",
+          "status": "approved",
+          "added": "v3-draft",
+          "reviewed": "2026-11-14, human reviewer (project owner), approved without edits"
+        },
+        {
+          "id": "FT-06",
+          "text": "Describe your system for tracking commitments you make to others. Give a specific example of it working.",
+          "status": "approved",
+          "added": "v3-draft",
+          "reviewed": "2026-11-14, human reviewer (project owner), approved without edits"
         }
       ]
     }
-  ]
+  }
 }
