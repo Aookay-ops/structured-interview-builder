@@ -1,0 +1,13 @@
+# Theme from the MiM design system (tokens.json): colors, fonts, radius.
+[theme]
+base = "light"
+primaryColor = "#5B2CA3"              # mim-purple: buttons, selected tabs, radios
+backgroundColor = "#FFFFFF"           # surface
+secondaryBackgroundColor = "#F3F1FB"  # surface-tint: inputs, cards
+textColor = "#2D3E50"                 # slate: body text
+linkColor = "#1776C7"                 # mim-blue
+borderColor = "#D9D3EC"               # hairline
+baseRadius = "12px"                   # radius-md
+font = "Open Sans:https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap"
+headingFont = "Montserrat:https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&display=swap"
+headingFontWeights = [800, 700, 700, 700, 700, 700]  # Montserrat extra-bold title, bold headings
