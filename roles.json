@@ -1,5 +1,5 @@
 {
-  "_note": "SYNTHETIC DEMO DATA. Question bank v3. Only questions with status 'approved' are shown in the app. AI-drafted questions enter as 'pending_review' and are approved by a human reviewer (status: approved / rejected). v3 review completed 2026-11-14: 36 of 36 drafts approved, 0 edited, 0 rejected.",
+  "_note": "SYNTHETIC DEMO DATA. Question bank v3. Only questions with status 'approved' are shown in the app. AI-drafted questions enter as 'pending_review' and are approved by a human reviewer (status: approved / rejected). v3 review completed 2026-11-14: 36 of 36 drafts approved, 0 edited, 0 rejected. 2026-11-17: PC-02, FT-02, AP-02 returned to pending_review after a competency-sort check.",
   "organization": "Minds in Motion (MiM), a fictional organization created for this demo",
   "roles": [
     {
@@ -269,8 +269,9 @@
         {
           "id": "AP-02",
           "text": "Describe a time you delivered the same content to two very different audiences. How did you adjust your approach for each?",
-          "status": "approved",
-          "added": "v2"
+          "status": "pending_review",
+          "added": "v2",
+          "reviewed": "2026-11-17: returned to pending_review after competency-sort check (1 or fewer of 4 sorters matched the intended competency); reword and re-test"
         },
         {
           "id": "AP-03",
@@ -419,8 +420,9 @@
         {
           "id": "PC-02",
           "text": "Describe a time someone raised an objection to something you proposed. How did you respond?",
-          "status": "approved",
-          "added": "v2"
+          "status": "pending_review",
+          "added": "v2",
+          "reviewed": "2026-11-17: returned to pending_review after competency-sort check (1 or fewer of 4 sorters matched the intended competency); reword and re-test"
         },
         {
           "id": "PC-03",
@@ -469,8 +471,9 @@
         {
           "id": "FT-02",
           "text": "Describe a time you realized a commitment you made was at risk of slipping. What did you do?",
-          "status": "approved",
-          "added": "v2"
+          "status": "pending_review",
+          "added": "v2",
+          "reviewed": "2026-11-17: returned to pending_review after competency-sort check (1 or fewer of 4 sorters matched the intended competency); reword and re-test"
         },
         {
           "id": "FT-03",

@@ -1,4 +1,4 @@
-"""Structured Interview Questions Builder (v0.5, question bank, Word export, mock mode).
+"""Structured Interview Questions Builder (v0.7, question bank, Word export, mock mode).
 
 Synthetic data only. Outputs are drafts, not validated assessment material.
 This tool does not score candidates or make hiring decisions.
@@ -24,7 +24,11 @@ DATA = json.loads((HERE / "roles.json").read_text(encoding="utf-8"))
 ROLES = {r["id"]: r for r in DATA["roles"]}
 BANK = DATA["competencies"]
 SET_SIZE = 5
+NOTE_LINES = 8
 STATUSES = ["Draft", "Approved", "Rejected"]
+EXPERIENCE_NOTE = ("Candidates may draw examples from paid work, school, volunteering, caregiving, or community "
+                   "settings. Rate the behavior described, not where it happened.")
+BETWEEN_NOTE = "A 2 or 4 means the answer falls between the anchors above and below it."
 REJECT_REASONS = ["Not job-related", "Unclear wording", "Potentially biased wording", "Duplicate", "Other"]
 
 st.set_page_config(page_title="Structured Interview Builder", page_icon=str(HERE / "assets/mim-symbol.png"),
@@ -135,7 +139,8 @@ def build_guide_docx(role, approved_items, rejected):
     note = doc.add_paragraph()
     note.add_run("DRAFT. Requires HR/I-O review before use. ").bold = True
     note.add_run(f"Generated {datetime.now():%B %d, %Y}. Ask every candidate for this opening the same "
-                 "questions, in this order, and rate each answer against its anchors before moving on.")
+                 "questions, in this order, and rate each answer against its anchors before moving on. "
+                 + EXPERIENCE_NOTE + " " + BETWEEN_NOTE)
     doc.add_paragraph("Candidate: ____________________   Interviewer: ____________________   "
                       "Date: __________")
 
@@ -165,7 +170,12 @@ def build_guide_docx(role, approved_items, rejected):
                     p.paragraph_format.keep_with_next = True
         r = doc.add_paragraph("Rating (1–5): ______")
         r.paragraph_format.space_before, r.paragraph_format.keep_with_next = Pt(10), True
-        doc.add_paragraph("Notes: " + "_" * 70)
+        notes = doc.add_paragraph("Notes on the candidate's answer (situation, actions, result):")
+        notes.paragraph_format.keep_with_next = True
+        for line in range(NOTE_LINES):  # room to write during the interview; kept on the same page
+            ln = doc.add_paragraph("_" * 78)
+            ln.paragraph_format.space_before = Pt(8)
+            ln.paragraph_format.keep_with_next = line < NOTE_LINES - 1
 
     doc.add_page_break()
     doc.add_heading("Review log (for HR records)", level=2)
@@ -189,6 +199,17 @@ def build_guide_docx(role, approved_items, rejected):
 st.title("Structured Interview Questions Builder")
 st.caption(DATA["organization"])
 st.warning("Draft tool, mock mode. Do not enter names, resumes, or any candidate information.")
+with st.expander("How this tool works (read first)", expanded=True):
+    st.markdown(
+        "This tool helps a hiring manager build a **structured interview**: every candidate for an "
+        "opening gets the same job-related questions, rated against the same descriptions of weak, "
+        "solid, and strong answers.\n\n"
+        "1. **Choose a role** to see its duties and the competencies the interview measures.\n"
+        "2. **Questions & anchors**: generate 5 questions from a human-reviewed bank and read the "
+        "rating anchors.\n"
+        "3. **Review & export**: approve, reword, reject (with a reason), or swap each question, then "
+        "download a Word interview guide.\n\n"
+        "Move between steps with the numbered tabs just below. The tool never scores candidates.")
 
 tab1, tab2, tab3 = st.tabs(["1. Choose a role", "2. Questions & anchors", "3. Review & export"])
 
@@ -208,7 +229,8 @@ with tab1:
                  options=list(ROLES), format_func=lambda rid: ROLES[rid]["title"],
                  index=None, placeholder="Choose a role", key="role_id", on_change=reset_role)
     if ss.role_id:
-        st.success(f"Selected: {ROLES[ss.role_id]['title']}. Go to step 2 to generate questions.")
+        st.success(f"Selected: {ROLES[ss.role_id]['title']}. Next: click **2. Questions & anchors** "
+                   "in the tabs at the top of the page.")
 
 role = ROLES.get(ss.role_id)
 
@@ -226,10 +248,15 @@ with tab2:
         if ss.locked:
             st.info("This set is locked because the guide was exported. Every candidate for this "
                     "opening should get the same questions.")
+        if ss.qitems:
+            st.caption(EXPERIENCE_NOTE + " " + BETWEEN_NOTE)
         for it in ss.qitems:
             with st.expander(f"[{it['competency']}] {it['question']}"):
                 for level, text in BANK[it["competency"]]["anchors"].items():
                     st.write(f"**{level}**: {text}")
+        if ss.qitems:
+            st.info("Next: click **3. Review & export** at the top of the page to approve the questions "
+                    "you want to keep. Approved questions stay when you generate a new set.")
 
 # ---- Step 3: review, swap, export ----
 with tab3:
